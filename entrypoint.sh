@@ -37,7 +37,7 @@ nikola build
 
 echo "==> Publishing..."
 if ! $INPUT_DRY_RUN; then
-    nikola github_deploy
+    nikola deploy
 else
     echo "Dry-run, skipping..."
 fi
