@@ -1,8 +1,7 @@
-# getnikola/nikola-action: a GitHub Action for building a Nikola site and deploying it to GitHub Pages.
+# Nikola Action: a GitHub Action for building a Nikola site and deploying it.
 
-This GitHub Action can build and deploy a Nikola website.
-
-Current version: getnikola/nikola-action@v4
+This builds off version: getnikola/nikola-action@v4
+Current version of last commit is: JesperDramsch/nikola-action@latest
 
 # Usage
 
@@ -28,10 +27,7 @@ jobs:
     - name: Check out
       uses: actions/checkout@v2
     - name: Build and Deploy Nikola
-      uses: getnikola/nikola-action@v4
-      with:
-        dry_run: false
-        apt_get: false
+      uses: JesperDramsch/nikola-action@latest
 ```
 
 ## Options
@@ -40,4 +36,4 @@ jobs:
 
 ## Extras
 
-By default, the action will install the latest stable release of `Nikola[extras]`. If you want to use the bleeding-edge version from `master`, or want to install some extra dependencies, you can provide a `requirements.txt` file in the repository.
+By default, the action will install the latest stable release of `Nikola[extras]`. If you want to use the bleeding-edge version from `master`, or want to install some extra dependencies, you can provide a `requirements.txt` file in the repository, then the last commit on getnikola/nikola will be installed.
