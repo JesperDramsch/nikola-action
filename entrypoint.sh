@@ -12,14 +12,10 @@ if [[ -f "requirements.txt" ]]; then
     # Since people might type just 'nikola', we force ghp-import to be installed.
     pip install -r requirements.txt ghp-import
     # Get latest hot-fixes from github
-    pip install git+https://github.com/getnikola/nikola.git@master -U
+    pip install -e git+https://github.com/getnikola/nikola.git@$(git ls-remote  git@github.com:getnikola/nikola.git | head -1 | awk '{print $1;}')#egg=Nikola
 else
     pip install "Nikola[extras]"
 fi
-
-
-echo "==> Installing latest Nikola from git..."
-pip install -e git+https://github.com/getnikola/nikola.git@$(git ls-remote  git@github.com:getnikola/nikola.git | head -1 | awk '{print $1;}')#egg=Nikola
 
 echo "==> Preparing..."
 if ! $INPUT_DRY_RUN; then
