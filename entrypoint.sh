@@ -15,6 +15,10 @@ else
     pip install "Nikola[extras]"
 fi
 
+
+echo "==> Installing latest Nikola from git..."
+pip install -e git+https://github.com/getnikola/nikola.git@$(git ls-remote  git@github.com:getnikola/nikola.git | head -1 | awk '{print $1;}')#egg=Nikola
+
 echo "==> Preparing..."
 if ! $INPUT_DRY_RUN; then
     src_branch="$(python -c 'import conf; print(conf.GITHUB_SOURCE_BRANCH)')"
