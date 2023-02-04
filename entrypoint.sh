@@ -29,12 +29,12 @@ if ! $INPUT_DRY_RUN; then
     src_branch="$(python -c 'import conf; print(conf.GITHUB_SOURCE_BRANCH)')"
     dest_branch="$(python -c 'import conf; print(conf.GITHUB_DEPLOY_BRANCH)')"
     
+    git config --global --add safe.directory /github/workspace
     git remote add ghpages "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
     git fetch ghpages $dest_branch
     git checkout -b $dest_branch --track ghpages/$dest_branch || true
     git pull ghpages $dest_branch || true
     git checkout $src_branch
-    git config --global --add safe.directory /github/workspace
     
     # Override config so that ghp-import does the right thing.
     printf '\n\nGITHUB_REMOTE_NAME = "ghpages"\nGITHUB_COMMIT_SOURCE = False\n' >> conf.py
