@@ -1,6 +1,6 @@
 # Nikola Action: a GitHub Action for building a Nikola site and deploying it.
 
-This builds off version: getnikola/nikola-action@v4
+This builds off version: getnikola/nikola-action@v7
 
 Current version of last commit is: JesperDramsch/nikola-action@latest
 
@@ -42,3 +42,19 @@ By default, the action will install the latest stable release of `Nikola[extras]
 ## Disclaimer
 
 This action relies on commits rather than releases of the getnikole/nikola repository. This might break your site. Use at your own risk.
+
+## Caveats
+
+According to the main package it says, the action will attempt to `import conf` before installing Nikola or your requirements. If your `conf.py` has any imports outside of stdlib, you need to wrap those with a `try-except` block. For example, if you want to use filters, your `conf.py` should have this:
+
+```py
+try:
+    from nikola import filters
+    FILTERS = {
+        ".html": [filters.typogrify],
+        ".js": [filters.closure_compiler],
+        ".jpg": ["jpegoptim --strip-all -m75 -v %s"],
+    }
+except ImportError:
+    FILTERS = {}
+```

@@ -17,6 +17,13 @@ else
     pip install "Nikola[extras]"
 fi
 
+echo "==> Installing extra packages..."
+if [[ "x${INPUT_APT_INSTALL}" != "x" ]]; then
+    apt-get update
+    apt-get install -y ${INPUT_APT_INSTALL}
+    apt-get clean
+fi
+
 echo "==> Preparing..."
 if ! $INPUT_DRY_RUN; then
     src_branch="$(python -c 'import conf; print(conf.GITHUB_SOURCE_BRANCH)')"
@@ -27,6 +34,7 @@ if ! $INPUT_DRY_RUN; then
     git checkout -b $dest_branch --track ghpages/$dest_branch || true
     git pull ghpages $dest_branch || true
     git checkout $src_branch
+    git config --global --add safe.directory /github/workspace
     
     # Override config so that ghp-import does the right thing.
     printf '\n\nGITHUB_REMOTE_NAME = "ghpages"\nGITHUB_COMMIT_SOURCE = False\n' >> conf.py
