@@ -30,6 +30,8 @@ if ! $INPUT_DRY_RUN; then
     dest_branch="$(python -c 'import conf; print(conf.GITHUB_DEPLOY_BRANCH)')"
     
     git config --global --add safe.directory /github/workspace
+    # https://stackoverflow.com/questions/38378914/how-to-fix-git-error-rpc-failed-curl-56-gnutls
+    git config --global http.postBuffer 1048576000
     git remote add ghpages "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
     git fetch ghpages $dest_branch
     git checkout -b $dest_branch --track ghpages/$dest_branch || true
