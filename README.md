@@ -1,6 +1,6 @@
 # Nikola Action: a GitHub Action for building a Nikola site and deploying it.
 
-This builds off version: getnikola/nikola-action@v7
+This builds off version: getnikola/nikola-action@v8
 
 Current version of last commit is: JesperDramsch/nikola-action@latest
 
