@@ -28,11 +28,10 @@ echo "==> Preparing..."
 if ! $INPUT_DRY_RUN; then
     src_branch="$(python -c 'import conf; print(conf.GITHUB_SOURCE_BRANCH)')"
     dest_branch="$(python -c 'import conf; print(conf.GITHUB_DEPLOY_BRANCH)')"
-    largest_size=$(git ls-tree -r --long HEAD | awk '{print $4, $3}' | sort -rn | head -1)
     
     git config --global --add safe.directory /github/workspace
     # https://stackoverflow.com/questions/38378914/how-to-fix-git-error-rpc-failed-curl-56-gnutls
-    git config --global http.postBuffer $largest_size
+    git config --global http.postBuffer 257286400
     git remote add ghpages "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
     git fetch ghpages $dest_branch
     git checkout -b $dest_branch --track ghpages/$dest_branch || true
