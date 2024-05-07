@@ -15,6 +15,7 @@ if [[ -f "requirements.txt" ]]; then
     pip install -e git+https://github.com/getnikola/nikola.git@$(git ls-remote  https://github.com/getnikola/nikola.git | head -1 | awk '{print $1;}')#egg=Nikola
 elif [[ -f "pixi.lock" ]]; then
     curl -fsSL https://pixi.sh/install.sh | bash
+    pixi install
 else
     pip install "Nikola[extras]"
 fi
