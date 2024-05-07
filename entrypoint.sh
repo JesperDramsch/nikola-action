@@ -15,7 +15,7 @@ if [[ -f "requirements.txt" ]]; then
     pip install -e git+https://github.com/getnikola/nikola.git@$(git ls-remote  https://github.com/getnikola/nikola.git | head -1 | awk '{print $1;}')#egg=Nikola
 elif [[ -f "pixi.lock" ]]; then
     curl -fsSL https://pixi.sh/install.sh | bash
-    pixi install
+    /github/home/.pixi/bin/pixi install
 else
     pip install "Nikola[extras]"
 fi
@@ -49,9 +49,9 @@ fi
 
 echo "==> Publishing..."
 if ! $INPUT_DRY_RUN; then
-    pixi run deploy
+    /github/home/.pixi/bin/pixi run deploy
 else
-    pixi run sidebar
+    /github/home/.pixi/bin/pixi run sidebar
     echo "Dry-run, skipping..."
 fi
 
