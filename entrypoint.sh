@@ -29,8 +29,8 @@ fi
 
 echo "==> Preparing..."
 if ! $INPUT_DRY_RUN; then
-    src_branch="$(/github/home/.pixi/bin/pixi run 'import conf; print(conf.GITHUB_SOURCE_BRANCH)')"
-    dest_branch="$(/github/home/.pixi/bin/pixi run 'import conf; print(conf.GITHUB_DEPLOY_BRANCH)')"
+    src_branch="$(/github/home/.pixi/bin/pixi run python -C 'import conf; print(conf.GITHUB_SOURCE_BRANCH)')"
+    dest_branch="$(/github/home/.pixi/bin/pixi run python -C 'import conf; print(conf.GITHUB_DEPLOY_BRANCH)')"
 
     git config --global --add safe.directory /github/workspace
     # https://stackoverflow.com/questions/38378914/how-to-fix-git-error-rpc-failed-curl-56-gnutls
